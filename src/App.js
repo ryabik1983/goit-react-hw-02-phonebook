@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 
-import PhonebookForm from './components/PhonebookForm/PhonebookForm';
+import ContactForm from './components/ContactForm/ContactForm';
 // import logo from './logo.svg';
 import styles from './App.css';
 
@@ -30,12 +30,12 @@ class App extends Component {
   // };
 
   render() {
-    console.log(Date.now());
+    // console.log(Date.now());
 
     return (
       <main className="main">
         <h1 className="title">Phonebook</h1>
-        <PhonebookForm onSubmit={this.formSubmitHandler} />
+        <ContactForm onSubmit={this.formSubmitHandler} />
 
         {/* <ContactForm onSubmit={this.formSubmitData} /> */}
         <h2 className="title">Contacts</h2>
