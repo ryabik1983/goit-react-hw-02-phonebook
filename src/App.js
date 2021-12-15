@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactsList from './components/ContactList/ContactList';
+import './App.css';
 
 class App extends Component {
   state = {
