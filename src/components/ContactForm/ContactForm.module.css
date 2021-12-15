@@ -20,26 +20,25 @@
   outline: none;
   cursor: pointer;
 }
-/*   
-.input: focus{
-    border-color: #2bd52b;
-  }
+.input:focus {
+  border-color: #2bd52b;
+}
 
-  .input::placeholder {
-    color: #797979;
-    text-align: center;
-  } */
+.input::placeholder {
+  color: #797979;
+  text-align: center;
+}
 
-/* .submit {
-    display: block;
-    margin: 0 auto 20px;
-    width: 200px;
-    height: 30px;
-    background: #54bb54;
-    border: none;
-    border-radius: 3px;
-    &:hover,
-    &:focus {
-      background: #2bd52b;
-    }
-  } */
+.submit {
+  display: block;
+  margin: 0 auto 20px;
+  width: 200px;
+  height: 30px;
+  background: #8454bb;
+  border: none;
+  border-radius: 3px;
+}
+.submit:hover,
+.submit:focus {
+  background: #d52bb9;
+}

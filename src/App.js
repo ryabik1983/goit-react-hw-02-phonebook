@@ -2,69 +2,72 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 
 import ContactForm from './components/ContactForm/ContactForm';
-// import logo from './logo.svg';
-import styles from './App.css';
+import Filter from './components/Filter/Filter';
+import ContactsList from './components/ContactList/ContactList';
 
 class App extends Component {
   state = {
     contacts: [],
+    filter: '',
     name: '',
+    number: '',
   };
 
-  formSubmitHandler = data => {
-    console.log(data);
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    if (contacts) {
+      this.setState({ contacts: contacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+  formSubmitData = ({ name, number }) => {
+    const newItem = { id: nanoid(), name: name, number: number };
+    let isUnique = this.state.contacts.some(el => el.name === name);
+    if (!isUnique) {
+      this.setState(prevStates => ({
+        contacts: [...prevStates.contacts, newItem],
+      }));
+    } else {
+      alert(`${name} is already in contacts`);
+    }
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log(this.state);
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
 
-  // handleNameChange = event => {
-  //   console.log(event.currentTarget.value);
-  // this.setState({name: event.currentTarget.value});
-  // };
-  // handleNameChange = e => {
-  //   console.log(e.currentTarget.value);
-  //   this.setState({number: e.currentTarget.value})
-  // };
+  renderContacts = () => {
+    const { filter, contacts } = this.state;
+    const toLowerCaseFilter = filter.toLowerCase();
+    return contacts.filter(el =>
+      el.name.toLowerCase().includes(toLowerCaseFilter),
+    );
+  };
+
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(el => el.id !== id),
+    }));
+  };
 
   render() {
-    // console.log(Date.now());
-
+    const { filter } = this.state;
     return (
       <main className="main">
         <h1 className="title">Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} />
-
-        {/* <ContactForm onSubmit={this.formSubmitData} /> */}
+        <ContactForm onSubmit={this.formSubmitData} />
         <h2 className="title">Contacts</h2>
-        {/* <Filter value={filter} onChange={this.changeFilter} />
-    <ContactsList
-      renderContacts={this.renderContacts()}
-      deleteContact={this.deleteContact} */}
-        {/* /> */}
+        <Filter value={filter} onChange={this.changeFilter} />
+        <ContactsList
+          renderContacts={this.renderContacts()}
+          deleteContact={this.deleteContact}
+        />
       </main>
-
-      // <Container>
-
-      // </Container>
-      // <div className="App">
-      //   <header className="App-header">
-      //     <img src={logo} className="App-logo" alt="logo" />
-      //     <p>
-      //       Edit <code>src/App.js</code> and save to reload.
-      //     </p>
-      //     <a
-      //       className="App-link"
-      //       href="https://reactjs.org"
-      //       target="_blank"
-      //       rel="noopener noreferrer"
-      //     >
-      //       Learn React
-      //     </a>
-      //   </header>
-      // </div>
     );
   }
 }
