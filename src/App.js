@@ -16,13 +16,19 @@ class App extends Component {
 
   componentDidMount() {
     const contacts = JSON.parse(localStorage.getItem('contacts'));
+    console.log('App componentDidMount');
+
     if (contacts) {
       this.setState({ contacts: contacts });
     }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(prevState);
+    console.log('this.state');
+
     if (prevProps.contacts !== this.state.contacts) {
+      console.log('Обновилось поле contacts');
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
@@ -57,6 +63,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('App render');
     const { filter } = this.state;
     return (
       <main className="main">
