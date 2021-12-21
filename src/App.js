@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactsList from './components/ContactList/ContactList';
-import Modal from './components/Modal/Modal';
+// import Modal from './components/Modal/Modal';
 import './App.css';
 
 class App extends Component {
@@ -13,14 +13,14 @@ class App extends Component {
     filter: '',
     name: '',
     number: '',
-    showModal: false,
+    // showModal: false,
   };
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
+  // toggleModal = () => {
+  //   this.setState(({ showModal }) => ({
+  //     showModal: !showModal,
+  //   }));
+  // };
 
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
@@ -90,7 +90,7 @@ class App extends Component {
     const { contacts, filter, showModal } = this.state;
     return (
       <main className="main">
-        <div>
+        {/* <div>
           <button type="button" onClick={this.toggleModal}>
             Open modal
           </button>
@@ -103,7 +103,7 @@ class App extends Component {
               </button>
             </Modal>
           )}
-        </div>
+        </div> */}
         <h1 className="title">Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitData} />
         <h2 className="title">Contacts</h2>
